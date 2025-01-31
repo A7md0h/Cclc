@@ -1,22 +1,22 @@
+// عند تحميل الصفحة، إضافة حدث للنقر على الزر
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector("button").addEventListener("click", calculateProfit);
+    document.getElementById("calculateBtn").addEventListener("click", calculateProfit);
 });
 
 function calculateProfit() {
+    let currency = document.getElementById("currency").value.trim();
     let amount = parseFloat(document.getElementById("amount").value);
     let cost = parseFloat(document.getElementById("cost").value);
     let currentPrice = parseFloat(document.getElementById("currentPrice").value);
-    let currency = document.getElementById("currency").value.trim();
-
     let resultDiv = document.getElementById("result");
 
-    // التأكد من إدخال جميع القيم بشكل صحيح
-    if (!currency) {
+    // التحقق من صحة المدخلات
+    if (currency === "") {
         resultDiv.innerHTML = "⚠️ الرجاء إدخال اسم العملة.";
         resultDiv.style.color = "#dc3545";
         return;
     }
-    
+
     if (isNaN(amount) || amount <= 0) {
         resultDiv.innerHTML = "⚠️ الرجاء إدخال عدد العملات بشكل صحيح.";
         resultDiv.style.color = "#dc3545";
