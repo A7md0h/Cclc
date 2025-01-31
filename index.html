@@ -12,18 +12,18 @@
         <h2>💰 حاسبة الربح والخسارة للعملات الرقمية</h2>
         
         <label for="currency">🔹 اسم العملة:</label>
-        <input type="text" id="currency" placeholder="مثال: سولانا">
+        <input type="text" id="currency" placeholder="مثال: سولانا" required>
 
         <label for="amount">🔹 عدد العملات:</label>
-        <input type="number" id="amount" placeholder="أدخل عدد العملات">
+        <input type="number" id="amount" placeholder="أدخل عدد العملات" required>
 
         <label for="cost">🔹 متوسط التكلفة ($):</label>
-        <input type="number" id="cost" placeholder="أدخل متوسط التكلفة">
+        <input type="number" id="cost" placeholder="أدخل متوسط التكلفة" required>
 
         <label for="currentPrice">🔹 السعر الحالي ($):</label>
-        <input type="number" id="currentPrice" placeholder="أدخل السعر الحالي">
+        <input type="number" id="currentPrice" placeholder="أدخل السعر الحالي" required>
 
-        <button onclick="calculateProfit()">📊 احسب الربح / الخسارة</button>
+        <button id="calculateBtn">📊 احسب الربح / الخسارة</button>
 
         <div id="result"></div>
     </div>
