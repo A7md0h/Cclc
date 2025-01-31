@@ -1,13 +1,17 @@
-// عند تحميل الصفحة، إضافة حدث للنقر على الزر
+// التأكد من تحميل الصفحة بالكامل قبل تشغيل JavaScript
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("calculateBtn").addEventListener("click", calculateProfit);
+    let calculateBtn = document.getElementById("calculateBtn");
+
+    if (calculateBtn) {
+        calculateBtn.addEventListener("click", calculateProfit);
+    }
 });
 
 function calculateProfit() {
     let currency = document.getElementById("currency").value.trim();
-    let amount = parseFloat(document.getElementById("amount").value);
-    let cost = parseFloat(document.getElementById("cost").value);
-    let currentPrice = parseFloat(document.getElementById("currentPrice").value);
+    let amount = document.getElementById("amount").value.trim();
+    let cost = document.getElementById("cost").value.trim();
+    let currentPrice = document.getElementById("currentPrice").value.trim();
     let resultDiv = document.getElementById("result");
 
     // التحقق من صحة المدخلات
@@ -17,23 +21,28 @@ function calculateProfit() {
         return;
     }
 
-    if (isNaN(amount) || amount <= 0) {
+    if (amount === "" || isNaN(amount) || parseFloat(amount) <= 0) {
         resultDiv.innerHTML = "⚠️ الرجاء إدخال عدد العملات بشكل صحيح.";
         resultDiv.style.color = "#dc3545";
         return;
     }
 
-    if (isNaN(cost) || cost <= 0) {
+    if (cost === "" || isNaN(cost) || parseFloat(cost) <= 0) {
         resultDiv.innerHTML = "⚠️ الرجاء إدخال متوسط التكلفة بشكل صحيح.";
         resultDiv.style.color = "#dc3545";
         return;
     }
 
-    if (isNaN(currentPrice) || currentPrice <= 0) {
+    if (currentPrice === "" || isNaN(currentPrice) || parseFloat(currentPrice) <= 0) {
         resultDiv.innerHTML = "⚠️ الرجاء إدخال السعر الحالي بشكل صحيح.";
         resultDiv.style.color = "#dc3545";
         return;
     }
+
+    // تحويل القيم إلى أرقام
+    amount = parseFloat(amount);
+    cost = parseFloat(cost);
+    currentPrice = parseFloat(currentPrice);
 
     // حساب القيم
     let totalCost = amount * cost;
@@ -46,6 +55,7 @@ function calculateProfit() {
                          💰 الربح / الخسارة: <strong>${profitLoss.toFixed(2)} دولار</strong> <br>
                          📈 النسبة: <strong>${profitLossPercentage.toFixed(2)}%</strong>`;
 
+    // تحديد لون النتيجة بناءً على الربح أو الخسارة
     if (profitLoss > 0) {
         resultDiv.innerHTML = resultMessage;
         resultDiv.style.color = "#28a745";
