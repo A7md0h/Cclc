@@ -1,29 +1,56 @@
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector("button").addEventListener("click", calculateProfit);
+});
+
 function calculateProfit() {
     let amount = parseFloat(document.getElementById("amount").value);
     let cost = parseFloat(document.getElementById("cost").value);
     let currentPrice = parseFloat(document.getElementById("currentPrice").value);
-    let currency = document.getElementById("currency").value;
+    let currency = document.getElementById("currency").value.trim();
 
-    if (isNaN(amount) || isNaN(cost) || isNaN(currentPrice) || amount <= 0 || cost <= 0 || currentPrice <= 0) {
-        document.getElementById("result").innerHTML = "⚠️ الرجاء إدخال قيم صحيحة.";
-        document.getElementById("result").style.color = "#dc3545";
+    let resultDiv = document.getElementById("result");
+
+    // التأكد من إدخال جميع القيم بشكل صحيح
+    if (!currency) {
+        resultDiv.innerHTML = "⚠️ الرجاء إدخال اسم العملة.";
+        resultDiv.style.color = "#dc3545";
+        return;
+    }
+    
+    if (isNaN(amount) || amount <= 0) {
+        resultDiv.innerHTML = "⚠️ الرجاء إدخال عدد العملات بشكل صحيح.";
+        resultDiv.style.color = "#dc3545";
         return;
     }
 
+    if (isNaN(cost) || cost <= 0) {
+        resultDiv.innerHTML = "⚠️ الرجاء إدخال متوسط التكلفة بشكل صحيح.";
+        resultDiv.style.color = "#dc3545";
+        return;
+    }
+
+    if (isNaN(currentPrice) || currentPrice <= 0) {
+        resultDiv.innerHTML = "⚠️ الرجاء إدخال السعر الحالي بشكل صحيح.";
+        resultDiv.style.color = "#dc3545";
+        return;
+    }
+
+    // حساب القيم
     let totalCost = amount * cost;
     let totalCurrentValue = amount * currentPrice;
     let profitLoss = totalCurrentValue - totalCost;
     let profitLossPercentage = (profitLoss / totalCost) * 100;
 
-    let resultMessage = `🔹 بالنسبة لعملة ${currency}: <br> 
+    // تنسيق النتيجة وعرضها
+    let resultMessage = `🔹 بالنسبة لعملة <strong>${currency}</strong>: <br> 
                          💰 الربح / الخسارة: <strong>${profitLoss.toFixed(2)} دولار</strong> <br>
                          📈 النسبة: <strong>${profitLossPercentage.toFixed(2)}%</strong>`;
 
     if (profitLoss > 0) {
-        document.getElementById("result").innerHTML = resultMessage;
-        document.getElementById("result").style.color = "#28a745";
+        resultDiv.innerHTML = resultMessage;
+        resultDiv.style.color = "#28a745";
     } else {
-        document.getElementById("result").innerHTML = resultMessage;
-        document.getElementById("result").style.color = "#dc3545";
+        resultDiv.innerHTML = resultMessage;
+        resultDiv.style.color = "#dc3545";
     }
 }
