@@ -8,7 +8,7 @@ body {
     background: #f8f9fa;
     margin: 0;
     padding: 0;
-    line-height: 1.8; /* تحسين المسافات بين السطور */
+    line-height: 1.8;
 }
 
 .container {
@@ -27,6 +27,7 @@ h2 {
     font-weight: 700;
     font-size: 24px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 label {
@@ -72,7 +73,7 @@ button:hover {
     line-height: 1.6;
 }
 
-/* تصميم التوقيع في نهاية الصفحة */
+/* تصميم التوقيع */
 footer {
     text-align: center;
     margin-top: 40px;
